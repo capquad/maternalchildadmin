@@ -1,0 +1,94 @@
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table tr {
+  border: 1px solid #ccc;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ccc;
+  padding: 0 8px;
+}
+
+.data-table tr.extra-info {
+  visibility: collapse;
+}
+
+.data-table .show-more {
+  text-align: center;
+}
+
+.data-table .show-more button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 4px;
+  font-size: 0.5em;
+  text-align: center;
+  background-color: red;
+  color: #fff;
+}
+
+.data-table .show-more button.active {
+  background-color: blue;
+}
+
+.data-table tr.hidden.show {
+  visibility: visible;
+}
+
+.data-table .extra-info {
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.extra-info > p > b {
+  width: 120px;
+  display: inline-block;
+}
+
+.table-search {
+  margin: 2em 0 1em;
+  display: flex;
+  width: 40%;
+}
+
+tr.hide {
+  display: none;
+}
+
+.paginate {
+  display: flex;
+  justify-content: flex-end;
+}
+.paginate span {
+  border: 1px solid #ccc;
+  height: 30px !important;
+}
+.paginate span a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.paginate span a:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+.paginate span a.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.table-info {
+  text-align: right;
+  padding: 12px 0 0;
+}
+
+/*# sourceMappingURL=table.css.map */
