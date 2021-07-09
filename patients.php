@@ -18,7 +18,7 @@ Resolver::require('views/snippets/header');
       <thead>
         <tr>
           <th></th>
-          <th>ID</th>
+          <th>Card</th>
           <th>Name</th>
           <th>Category</th>
         </tr>

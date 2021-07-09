@@ -12,6 +12,8 @@ $dotenv = Dotenv::createImmutable(ROOT);
 $dotenv->safeLoad();
 
 if ($_ENV['MAINTENANCE'] === '1') {
-  echo "Maintenance Mode";
-  exit();
+	echo "Maintenance Mode";
+	exit();
 }
+
+header("Access-Control-Allow-Origin: http://127.0.0.1:8080");

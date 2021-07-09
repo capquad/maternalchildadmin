@@ -1,9 +1,15 @@
 import Table from './DataTable.js';
+// import { capitalize } from './Functions.js';
+
+String.prototype.capitalize = function () {
+	return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 $(() => {
 	const table = new Table($('table.data-table')[0]);
+	table.attachSearchBar();
 	table.loadData({
-		url: 'http://localhost:3000/patients',
+		url: 'http://mcadmin.maternalchild/api/patients.php',
 		data: { 'card-no': 'ID', name: 'Name', category: 'Category' },
 		paginate: true,
 		successCallback: function (d) {
@@ -15,18 +21,25 @@ $(() => {
           <td class="show-more"></td>
           <td>${row['card-no']}</td>
           <td>${row.name}</td>
-          <td>${row.category}</td>
+          <td>${row.category.capitalize()}</td>
         </tr>
         <tr class='extra-info'>
           <td>
-            <p>Name: Hello</p>
-          
+            <p><b>Name:</b> ${row.name}</p>
+						<p><b>E-mail:</b> ${row.email}</p>
+						<p><b>Phone Number:</b> ${row.phone}</p>
+						<p><b>Date of Birth:</b> ${row.birthDate}</p>
+						<p><b>Gender:</b> ${row.gender.capitalize()}</p>
+						<a href="/patient.php?patient=${row['card-no']}" class="btn btn-dark">View</a>
           </td>
         </tr>
         `;
 				text += tr;
 			});
 			return text;
+		},
+		failureCallback: (err) => {
+			console.error(err);
 		},
 	});
 });

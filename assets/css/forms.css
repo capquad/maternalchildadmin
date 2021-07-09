@@ -1,0 +1,17 @@
+label.required:after {
+  content: " *";
+}
+
+.form-group {
+  margin-top: 0.8em;
+}
+
+.form-group .btn {
+  margin: 10px 0 0;
+}
+
+[disabled] {
+  cursor: not-allowed;
+}
+
+/*# sourceMappingURL=forms.css.map */

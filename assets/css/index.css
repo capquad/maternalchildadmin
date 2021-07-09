@@ -14,16 +14,53 @@
   background: linear-gradient(to left, #99f2c8, #1f4037);
   z-index: 9999;
 }
-
-#sidebar.sidebar-open {
-  display: initial;
-}
-
 #sidebar .head {
   display: flex;
   justify-content: space-evenly;
   align-content: center;
   align-items: center;
+}
+#sidebar .sidenav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#sidebar .sidenav .drop {
+  position: relative;
+}
+#sidebar .sidenav .drop .dropmenu {
+  position: relative;
+  height: 0px;
+  overflow: hidden;
+  transition: all 0.6s;
+}
+#sidebar .sidenav .drop .dropmenu ul {
+  list-style-type: disc !important;
+  margin: 0;
+  padding: 0;
+}
+#sidebar .sidenav .drop .dropmenu ul li a {
+  padding-left: 2.4em;
+  font-size: 0.9em;
+}
+#sidebar .sidenav .drop:hover .dropmenu {
+  height: 100px;
+}
+#sidebar .sidenav li a [class^=fa] {
+  width: 30px;
+  text-align: center;
+}
+#sidebar .sidenav li a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#sidebar .copyright {
+  position: absolute;
+  bottom: 0px;
+  font-size: 0.8rem;
+}
+
+#sidebar.sidebar-open {
+  display: initial;
 }
 
 #sidebar .head a {
@@ -46,12 +83,6 @@
   margin-top: 20px;
 }
 
-#sidebar .sidenav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 #sidebar .sidenav li {
   width: 100%;
 }
@@ -64,28 +95,14 @@
   width: 100%;
 }
 
-#sidebar .sidenav li a [class^=fa] {
-  width: 30px;
-  text-align: center;
-}
-
-#sidebar .sidenav li a:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-#sidebar .copyright {
-  position: absolute;
-  bottom: 0px;
-  font-size: 0.8rem;
-}
-
 main {
   margin-left: 30vw;
+  padding-bottom: 30px;
 }
 
 #topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   align-content: center;
   padding: 4px 24px;
@@ -120,17 +137,24 @@ button.dropdown-toggle {
   border-radius: 0%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 787px) {
   #sidebar {
-    width: 18vw;
+    width: 20vw;
+    display: flow-root;
   }
 
   main {
-    margin-left: 18vw;
+    margin-left: 20vw;
+  }
+}
+@media (max-width: 786px) {
+  #sidebar {
+    width: 30vw;
+    display: initial;
   }
 
-  #topbar {
-    justify-content: flex-end;
+  main {
+    margin-left: 30vw;
   }
 }
 @media (max-width: 480px) {
@@ -146,6 +170,10 @@ button.dropdown-toggle {
 
   main {
     margin-left: 0px;
+  }
+
+  #topbar {
+    justify-content: space-between;
   }
 }
 

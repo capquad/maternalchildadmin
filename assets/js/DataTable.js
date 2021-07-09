@@ -204,7 +204,7 @@ class Table {
 				this.initializePages();
 			}
 		} catch (error) {
-			options.failureCallbak(error);
+			options.failureCallback(error);
 		}
 	}
 
