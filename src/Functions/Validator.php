@@ -12,9 +12,10 @@ class Validator
 	 */
 	static function Authorize(): void
 	{
-		if ($_SERVER['SCRIPT_NAME'] !== '/login.php') {
-			if (@$_SESSION['login']['status'] !== true) {
+		if ($_SERVER['SCRIPT_NAME'] !== '/login.php' and $_SERVER['SCRIPT_NAME'] !== '/api/login.php') {
+			if (@$_SESSION['login'] !== true) {
 				// echo "Not logged in.";
+				// exit();
 				header("Location: /login.php");
 			}
 		}
@@ -34,7 +35,7 @@ class Validator
 		if (empty($string)) {
 			return false;
 		}
-		if (preg_match('/^[a-zA-Z-\' ]+$/', $string)) {
+		if (preg_match('/^[a-zA-Z-\' @$><\?0-9!_]+$/', $string)) {
 			return $string;
 		}
 		return false;

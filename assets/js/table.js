@@ -23,7 +23,9 @@ $(() => {
 						<p><b>Phone Number:</b> ${row.phone}</p>
 						<p><b>Date of Birth:</b> ${row.birthDate}</p>
 						<p><b>Gender:</b> ${row.gender.capitalize()}</p>
+						<p>
 						<a href="/patient.php?patient=${row['card-no']}" class="btn btn-dark">View</a>
+						</p>
           </td>
         </tr>
         `;

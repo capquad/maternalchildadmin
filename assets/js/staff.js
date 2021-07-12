@@ -24,6 +24,9 @@ $(() => {
 						<p><b>Facebook:</b> ${row.facebook}</p>
 						<p><b>Twitter:</b> ${row.twitter}</p>
 						<p><b>LinkedIn:</b> ${row.linkedin}</p>
+						<p>
+							<button class='btn btn-dark'>View</button>
+						</p>
 					</td>
 				</tr>`;
 
