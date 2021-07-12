@@ -2,6 +2,8 @@
 
 namespace Database;
 
+use mysqli;
+
 /**
  * Database class: abstracts common database functions 
  */
@@ -87,7 +89,7 @@ class Database
 	 * @param array $data - array encoded column and values of data to be entered.
 	 * @return bool
 	 */
-	function insert(string $table, array $data): bool
+	function insert(string $table, array $data): bool|string
 	{
 		if ($this->tableExists($table)) {
 			$sql = "INSERT INTO $table ";
@@ -99,15 +101,18 @@ class Database
 			$sql .= "(" . join(',', array_keys($data)) . ")";
 			$sql .= "VALUES (" . join(',', array_values($data)) . ")";
 
+			// return $sql;
+
 			$query = $this->runQuery($sql);
 			if ($query) {
-				return true;
+				return @mysqli_insert_id($this->cxn);
 			}
 		}
 		return false;
 	}
 
-	function getError() {
+	function getError()
+	{
 		return @mysqli_error($this->cxn);
 	}
 

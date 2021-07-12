@@ -7,7 +7,7 @@ class Table {
 		pageCount: 10,
 	};
 
-	constructor(element, options = null) {
+	constructor(element) {
 		this.#table = element;
 	}
 
@@ -219,5 +219,3 @@ class Table {
 		return this.#table.querySelector('tbody');
 	}
 }
-
-export default Table;

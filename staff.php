@@ -26,5 +26,5 @@ require './views/snippets/header.php';
 </div>
 
 <?php
-$scripts = ['staff.js'];
+$scripts = ['Datatable.js', 'staff.js'];
 require './views/snippets/footer.php';

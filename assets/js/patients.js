@@ -1,7 +1,7 @@
 (() => {
 	async function getPatientNumber(category = 'personal') {
 		try {
-			const res = await fetch('/api/patients.php?getNewNumber&category=' + category);
+			const res = await fetch('http://127.0.0.1:8000/api/patients.php?getNewNumber&category=' + category);
 			const data = await res.json();
 			if (data.ok) {
 				return data.data['card-number'];

@@ -1,15 +1,8 @@
-import Table from './DataTable.js';
-// import { capitalize } from './Functions.js';
-
-String.prototype.capitalize = function () {
-	return this.charAt(0).toUpperCase() + this.slice(1);
-};
-
 $(() => {
 	const table = new Table($('table.data-table')[0]);
 	table.attachSearchBar();
 	table.loadData({
-		url: 'http://mcadmin.maternalchild/api/patients.php',
+		url: '/api/patients.php',
 		data: { 'card-no': 'ID', name: 'Name', category: 'Category' },
 		paginate: true,
 		successCallback: function (d) {

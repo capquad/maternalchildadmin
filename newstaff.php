@@ -10,7 +10,7 @@ require './views/snippets/header.php';
 		<h1>New Staff</h1>
 	</div>
 	<div class="container">
-		<form action="#" method="POST">
+		<form action="/api/staff.php" method="POST" class="async-form" data-redirect="/staff.php">
 			<div class="form-group">
 				<label for="title">Title</label>
 				<select name="title" id="title" class="form-control">
@@ -39,13 +39,20 @@ require './views/snippets/header.php';
 			<div class="form-group">
 				<label for="gender" class="required">Gender</label>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" value="male" id="male" />
+					<input class="form-check-input" type="radio" value="male" id="male" name="gender" />
 					<label class="form-check-label" for="male">Male</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" value="female" id="female" />
+					<input class="form-check-input" type="radio" value="female" id="female" name="gender" />
 					<label class="form-check-label" for="female">Female</label>
 				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="required">E-mail Address</label>
+				<input type="email" name="email" id="email" required="required" class="form-control" />
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-dark">Initiate Request</button>
 			</div>
 		</form>
 	</div>
