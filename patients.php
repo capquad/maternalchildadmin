@@ -5,7 +5,7 @@ use Functions\Resolver;
 require './init.php';
 
 $stylesheets = ['table.css'];
-Resolver::require('views/snippets/header');
+require './views/snippets/header.php';
 ?>
 
 <div id="main">
