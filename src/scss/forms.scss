@@ -8,6 +8,7 @@ label.required:after {
 .form-group .btn {
 	margin: 10px 0 0;
 }
+[readonly],
 [disabled] {
 	cursor: not-allowed;
 }

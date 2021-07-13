@@ -7,6 +7,7 @@ $(() => {
 	const submitForm = async (form, options) => {
 		const action = form.action;
 		const formData = new FormData(form);
+
 		let defOptions = {
 			method: 'POST',
 			body: formData,
@@ -18,6 +19,8 @@ $(() => {
 			const data = await res.json();
 			if (data.ok) {
 				location.href = form.getAttribute('data-redirect') || '/';
+			} else {
+				console.log(data);
 			}
 		} catch (err) {
 			console.error(err);

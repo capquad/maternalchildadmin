@@ -31,4 +31,4 @@ Resolver::require('views/snippets/header');
 
 <?php
 $scripts = ['Datatable.js', 'table.js'];
-Resolver::require('views/snippets/footer');
+require './views/snippets/footer.php';

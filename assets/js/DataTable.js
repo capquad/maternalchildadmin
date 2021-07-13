@@ -8,6 +8,10 @@ class Table {
 	};
 
 	constructor(element) {
+		if (!element) {
+			throw new Error('Invalid element selected');
+		}
+		// console.log(element);
 		this.#table = element;
 	}
 

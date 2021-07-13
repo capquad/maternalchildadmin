@@ -111,6 +111,31 @@ class Database
 		return false;
 	}
 
+	/**
+	 * update - updates a record in a table
+	 */
+	function update(string $table, array $data, ?string $where = null): bool|string
+	{
+		if ($this->tableExists($table)) {
+			$sql = "UPDATE IGNORE $table SET ";
+			$kvpairs = array_map(function ($key, $value) {
+				return "$key='$value'";
+			}, array_keys($data), array_values($data));
+
+			$sql .= join(",", $kvpairs);
+
+			if ($where) {
+				$sql .= " WHERE $where";
+			}
+
+			$query = $this->runQuery($sql);
+			if ($query) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function getError()
 	{
 		return @mysqli_error($this->cxn);

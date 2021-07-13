@@ -9,8 +9,34 @@ require '../init.php';
 $db = new Database();
 $db->connect();
 
+if (@$_GET['endpoint'] === 'update') {
+	// Validate POSTED Information
+	if (!isset($_POST['staff'])) {
+		Response::Json(['ok' => false, 'error' => 'Required information not fould. Please include staff field in your request body.'], 403);
+	}
+	$id = Validator::validateInteger($_POST['staff']);
+	if ($id) {
+		$title = Validator::validateOption($_POST['title'], ['mr', 'mrs', 'engr', 'dr']);
+		$firstname = Validator::validateString($_POST['firstname']);
+		$lastname = Validator::validateString($_POST['lastname']);
+		$middlename = Validator::validateString($_POST['middlename']);
+		$gender = Validator::validateOption($_POST['gender'], ['male', 'female']);
+		$birthDate = Validator::validateDate($_POST['birthdate']);
+		$email = Validator::validateEmail($_POST['email']);
+		$phone = Validator::validatePhone($_POST['phone']);
 
-if ($_POST) {
+		$update1 = $db->update('staff', ['firstname' => $firstname, 'lastname' => $lastname, 'middlename' => $middlename, 'title' => $title], "id='$id'");
+
+		// Response::Json([$update1]);
+
+		$db->update('staff_details', ['phone' => $phone, 'email' => $email, 'gender' => $gender, 'birthDate' => $birthDate], "staffid='$id'");
+		Response::Json(['ok' => true]);
+	}
+}
+
+if (@$_GET['endpoint'] === 'create') {
+	// Response::Json($_POST);
+	// Response::Json(['error' => 1]);
 	$firstname = Validator::validateString($_POST['firstname']);
 	$lastname = Validator::validateString($_POST['lastname']);
 	$middlename = Validator::validateString(($_POST['middlename']));
@@ -29,22 +55,19 @@ if ($_POST) {
 		}
 	}
 
-
-	Response::Json(['ok' => [$firstname, $lastname, $middlename, $gender, $email, $title, $phone]]);
+	Response::Json(['ok' => false, 'error' => 'Invalid input supplied']);
 }
 
-// if (!isset($_GET) or !isset($_POST)) {
+
 $staff = $db->select('staff', 'id, title,firstname, lastname, middlename');
 $nstaff = array_map(function ($data) use ($db) {
-	$details = $db->select('staff_details', 'office, phone, email, facebook, twitter, linkedin', "staffid = '$data[id]'")[0];
+	$details = $db->select('staff_details', 'office, phone, email, birthDate, facebook, twitter, linkedin', "staffid = '$data[id]'")[0];
 	$data += $details;
 
-	// print_r($data);
 
 	$data['name'] = "$data[firstname] $data[lastname] $data[middlename]";
-	unset($data['firstname'], $data['lastname'], $data['middlename'], $data['id']);
+	unset($data['firstname'], $data['lastname'], $data['middlename']);
 	return $data;
 }, $staff);
 
 Response::Json($nstaff);
-// }
