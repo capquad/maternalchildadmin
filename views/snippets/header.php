@@ -9,10 +9,25 @@ global $stylesheets, $title;
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/assets/vendor/Font-Awesome/css/all.min.css">
-	<link rel="stylesheet" href="/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+	<?php
+	if ($_ENV['CDN'] === '0') {
+		echo <<<_LINKS
+		<link rel="stylesheet" href="/assets/vendor/Font-Awesome/css/all.min.css">
+		<link rel="stylesheet" href="/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+		
+		_LINKS;
+	} else {
+		echo <<<_LINKS
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		
+		_LINKS;
+	}
+	?>
+
 	<link rel="stylesheet" href="/assets/css/index.css">
 	<?php
+
 	if ($stylesheets) {
 		foreach ($stylesheets as $sheet) {
 			echo "<link rel='stylesheet' href='/assets/css/$sheet'>\n";
@@ -20,9 +35,21 @@ global $stylesheets, $title;
 	}
 	?>
 	<title><?= $title ? $title : 'MCAdmin' ?></title>
+	<?php
+	if ($_ENV['CDN'] === '0') {
+		echo <<<_SCRIPTS
+		<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-	<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		_SCRIPTS;
+	} else {
+		echo <<<_SCRIPTS
+		<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+		_SCRIPTS;
+	}
+	?>
 </head>
 
 <body>
