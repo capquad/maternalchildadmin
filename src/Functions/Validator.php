@@ -99,4 +99,28 @@ class Validator
 		}
 		return false;
 	}
+
+	/**
+	 * validateCardNumber: validate a patient's card number
+	 */
+	static function validateCardNumber(string $number): string | bool
+	{
+		$number = Validator::cleanup($number);
+		if (preg_match('/^.{3}-\d{6,7}$/', $number)) {
+			return $number;
+		}
+		return false;
+	}
+
+	/**
+	 * validateInteger: validate and return a number string
+	 */
+	static function validateInteger(string $int): bool|int
+	{
+		$int = Validator::cleanup($int);
+		if (preg_match('/^\d+$/', $int)) {
+			return (int) $int;
+		}
+		return false;
+	}
 }

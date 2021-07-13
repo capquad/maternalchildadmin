@@ -10,8 +10,8 @@ label.required:after {
   margin: 10px 0 0;
 }
 
-[disabled],
-[readonly] {
+[readonly],
+[disabled] {
   cursor: not-allowed;
 }
 

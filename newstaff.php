@@ -10,7 +10,7 @@ require './views/snippets/header.php';
 		<h1>New Staff</h1>
 	</div>
 	<div class="container">
-		<form action="/api/staff.php" method="POST" class="async-form" data-redirect="/staff.php">
+		<form action="/api/staff.php?endpoint=create" method="POST" class="async-form" data-redirect="/staff.php">
 			<div class="form-group">
 				<label for="title">Title</label>
 				<select name="title" id="title" class="form-control">
@@ -52,7 +52,7 @@ require './views/snippets/header.php';
 				<input type="email" name="email" id="email" required="required" class="form-control" />
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-dark">Initiate Request</button>
+				<input type="submit" class="btn btn-primary" value="Submit" name="createStaff" />
 			</div>
 		</form>
 	</div>
