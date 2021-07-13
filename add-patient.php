@@ -1,8 +1,12 @@
 <?php
 
+use Database\Database;
 use Functions\Resolver;
 
 require './init.php';
+
+$db = new Database();
+$db->connect();
 
 $stylesheets = ['forms.css'];
 require './views/snippets/header.php';
@@ -45,8 +49,15 @@ require './views/snippets/header.php';
 			<div class="form-group">
 				<label for="category" class="required">Category</label>
 				<select name="category" id="category" class="form-control">
-					<option value="personal">Personal</option>
-					<option value="antenatal">Antenatal</option>
+					<?php
+						$categories = $db->select('cards', 'name');
+						foreach ($categories as $cat) {
+							echo <<<_CAT
+								<option value="$cat[name]">$cat[name]</option>
+
+							_CAT;
+						}
+					?>
 				</select>
 			</div>
 			<div class="form-group">

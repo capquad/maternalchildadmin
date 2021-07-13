@@ -117,7 +117,7 @@ class Database
 	function update(string $table, array $data, ?string $where = null): bool|string
 	{
 		if ($this->tableExists($table)) {
-			$sql = "UPDATE IGNORE $table SET ";
+			$sql = "UPDATE $table SET ";
 			$kvpairs = array_map(function ($key, $value) {
 				return "$key='$value'";
 			}, array_keys($data), array_values($data));
