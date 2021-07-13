@@ -3,3 +3,4 @@ vendor
 *.sql
 assets/vendor
 node_modules
+.htaccess
