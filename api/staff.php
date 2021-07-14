@@ -37,16 +37,16 @@ if (@$_GET['endpoint'] === 'update') {
 if (@$_GET['endpoint'] === 'create') {
 	// Response::Json($_POST);
 	// Response::Json(['error' => 1]);
+	$title = Validator::validateOption($_POST['title'], ['engr', 'mr', 'mrs', 'dr']);
 	$firstname = Validator::validateString($_POST['firstname']);
 	$lastname = Validator::validateString($_POST['lastname']);
 	$middlename = Validator::validateString(($_POST['middlename']));
 	$gender = Validator::validateOption($_POST['gender'], ['male', 'female']);
 	$email = Validator::validateEmail($_POST['email']);
-	$title = Validator::validateOption($_POST['title'], ['engr', 'mr', 'mrs', 'dr']);
 	$phone = Validator::validatePhone($_POST['phone']);
 
 	if ($firstname and $lastname and $phone and $title and $gender) {
-		$insertOne = $db->insert('staff', ['firstname' => $firstname, 'lastname' => $lastname, 'middlename' => $middlename]);
+		$insertOne = $db->insert('staff', ['title' => $title, 'firstname' => $firstname, 'lastname' => $lastname, 'middlename' => $middlename]);
 		if ($insertOne) {
 			if ($db->insert('staff_details', ['staffid' => $insertOne, 'phone' => $phone, 'email' => $email])) {
 				Response::Json(['ok' => true, 'id' => $insertOne]);

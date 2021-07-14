@@ -23,4 +23,6 @@ if ($_POST) {
 			// Response::Json(['ok' => true, $staff]);
 		}
 	}
+	http_response_code(404);
+	exit();
 }
