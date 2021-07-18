@@ -91,4 +91,13 @@ tr.hide {
   padding: 12px 0 0;
 }
 
+td.details-control {
+  background: url("/assets/details_open.png") no-repeat center center;
+  cursor: pointer;
+}
+
+tr.shown td.details-control {
+  background: url("/assets/details_close.png") no-repeat center center;
+}
+
 /*# sourceMappingURL=table.css.map */

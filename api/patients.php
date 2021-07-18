@@ -13,6 +13,31 @@ $db->connect();
 
 $patients = $db->select('patients');
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	if (!$_GET or @$_GET['_']) {
+		$npatients = array_map(function ($patient) use ($db) {
+			$details = $db->select('patient_details', null, "cardNumber='$patient[cardNumber]'")[0];
+			$patient['card-no'] = $patient['cardNumber'];
+			$patient['email'] = $details['email'];
+			$patient['phone'] = $details['phone'];
+			$patient['gender'] = $details['gender'];
+			$patient['birthDate'] = $details['birthDate'];
+			unset($patient['cardNumber']);
+			unset($details);
+			$patient['category'] = ucfirst($patient['category']);
+			$patient['name'] = "$patient[lastname] $patient[firstname]";
+			if ($patient['middlename']) {
+				$patient['name'] .= " $patient[middlename]";
+			}
+			unset($patient['firstname'], $patient['lastname'], $patient['middlename']);
+
+
+			return $patient;
+		}, $patients);
+		Response::Json($npatients);
+	}
+}
+
 if (isset($_GET['getNewNumber'])) {
 	if (isset($_GET['category'])) {
 		$category = Validator::validateString($_GET['category']);
@@ -40,24 +65,3 @@ if (isset($_GET['getNewNumber'])) {
 	}
 	Response::Json(['ok' => false, 'error' => 'No category indicated']);
 }
-
-$npatients = array_map(function ($patient) use ($db) {
-	$details = $db->select('patient_details', null, "cardNumber='$patient[cardNumber]'")[0];
-	$patient['card-no'] = $patient['cardNumber'];
-	$patient['email'] = $details['email'];
-	$patient['phone'] = $details['phone'];
-	$patient['gender'] = $details['gender'];
-	$patient['birthDate'] = $details['birthDate'];
-	unset($patient['cardNumber']);
-	unset($details);
-	$patient['name'] = "$patient[lastname] $patient[firstname]";
-	if ($patient['middlename']) {
-		$patient['name'] .= " $patient[middlename]";
-	}
-	unset($patient['firstname'], $patient['lastname'], $patient['middlename']);
-
-
-	return $patient;
-}, $patients);
-
-Response::Json($npatients);

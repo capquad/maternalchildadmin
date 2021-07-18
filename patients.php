@@ -14,7 +14,7 @@ require './views/snippets/header.php';
 	</div>
 
 	<div class="table-wrapper container">
-		<table id="data-table" class="data-table">
+		<table id="data-table" class="display">
 			<thead>
 				<tr>
 					<th></th>
@@ -30,5 +30,5 @@ require './views/snippets/header.php';
 </div>
 
 <?php
-$scripts = ['Datatable.js', 'table.js'];
+$scripts = ['Datatable.js', 'patients.js'];
 require './views/snippets/footer.php';

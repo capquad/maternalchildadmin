@@ -116,6 +116,7 @@ require './views/snippets/header.php';
 			<div class="form-group">
 				<input type="hidden" name="card-number" value="<?= $patient['cardNumber'] ?>" />
 				<input type="submit" class="btn btn-primary" value="Submit" name="updatePatient" />
+				<button type="button" class="btn btn-success">Check In</button>
 			</div>
 		</form>
 	</div>
@@ -126,5 +127,5 @@ require './views/snippets/header.php';
 </div>
 
 <?php
-$scripts = ['patientedit.js'];
+$scripts = ['patient.js', 'patientedit.js'];
 require './views/snippets/footer.php';

@@ -23,3 +23,7 @@ function constructPatientNumber(string $category, string $number): string
 	$number = "$category-$count$month$year";
 	return $number;
 }
+
+function constructHeaderLinks()
+{
+}
