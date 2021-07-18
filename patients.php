@@ -30,5 +30,5 @@ require './views/snippets/header.php';
 </div>
 
 <?php
-$scripts = ['Datatable.js', 'patients.js'];
+$scripts = ['patients.js'];
 require './views/snippets/footer.php';

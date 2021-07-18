@@ -1,44 +1,56 @@
 $(() => {
-	try {
-		const table = new Table($('table.data-table')[0]);
-		table.attachSearchBar();
-		table.loadData({
-			url: '/api/staff.php',
-			failureCallback: (err) => {
-				console.error(err);
+	window.addEventListener('load', () => {
+		function format(d) {
+			return `<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">
+				<tr>
+					<td>Full name:</td>
+					<td>${d.name}</td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td>${d.email}</td>
+				</tr>
+				<tr>
+					<td>Phone Number:</td>
+					<td>${d.phone}</td>
+				</tr>
+				<tr>
+					<td><a href="/staff.php?staff=${d.id}">View</a></td>
+				</tr>
+			</table>`;
+		}
+		const table = $('.data-table').DataTable({
+			ajax: {
+				url: '/api/staff.php',
+				dataSrc: '',
 			},
-			paginate: true,
-			successCallback: (data) => {
-				let text = '';
-				data.forEach((row) => {
-					let tr = `<tr>
-						<td class="show-more"></td>
-						<td>${row.name}</td>
-						<td>${row.office ? row.office.toUpperCase() : row.office}</td>
-					</tr>
-					<tr class="extra-info">
-						<td>
-							<p><b>Title:</b> ${row.title.capitalize()}</p>
-							<p><b>Name:</b> ${row.name}</p>
-							<p><b>Department:</b> ${row.office ? row.office.toUpperCase() : row.office || 'ICT'}</p>
-							<p><b>Date of Birth:</b> ${row.birthdate}</p>
-							<p><b>Phone:</b> ${row.phone}</p>
-							<p><b>E-mail:</b> ${row.email}</p>
-							<p><b>Facebook:</b> ${row.facebook}</p>
-							<p><b>Twitter:</b> ${row.twitter}</p>
-							<p><b>LinkedIn:</b> ${row.linkedin}</p>
-							<p>
-								<a href='/staff.php?staff=${row.id}' class='btn btn-dark'>View</a>
-							</p>
-						</td>
-					</tr>`;
-
-					text += tr;
-				});
-				return text;
+			columns: [
+				{
+					className: 'details-control',
+					orderable: false,
+					data: null,
+					defaultContent: '',
+				},
+				{ data: 'name' },
+				{ data: 'office' },
+			],
+			order: [[1, 'asc']],
+			language: {
+				search: 'Type to search: ',
 			},
 		});
-	} catch (e) {
-		// console.error(e);
-	}
+
+		$('.data-table tbody').on('click', 'td.details-control', function () {
+			const tr = $(this).closest('tr');
+			const row = table.row(tr);
+
+			if (row.child.isShown()) {
+				row.child.hide();
+				tr.removeClass('shown');
+			} else {
+				row.child(format(row.data())).show();
+				tr.addClass('shown');
+			}
+		});
+	});
 });

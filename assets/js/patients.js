@@ -27,6 +27,25 @@
 					<td>Full name:</td>
 					<td>${d.name}</td>
 				</tr>
+				<tr>
+					<td>Date of Birth:</td>
+					<td>${d.birthDate}</td>
+				</tr>
+				<tr>
+					<td>E-mail:</td>
+					<td>${d.email}</td>
+				</tr>
+				<tr>
+					<td>Phone Number:</td>
+					<td>${d.phone}</td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td>${d.gender}</td>
+				</tr>
+				<tr>
+					<td><a href="/patient.php?patient=${d['card-no']}">View</a></td>
+				</tr>
 			</table>`;
 		}
 		const table = $('#data-table').DataTable({
@@ -46,7 +65,6 @@
 				{ data: 'category' },
 			],
 			order: [[1, 'asc']],
-			select: true,
 			language: {
 				search: 'Type to search: ',
 			},

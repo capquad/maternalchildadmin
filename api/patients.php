@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 			$patient['card-no'] = $patient['cardNumber'];
 			$patient['email'] = $details['email'];
 			$patient['phone'] = $details['phone'];
-			$patient['gender'] = $details['gender'];
+			$patient['gender'] = ucfirst($details['gender']);
 			$patient['birthDate'] = $details['birthDate'];
 			unset($patient['cardNumber']);
 			unset($details);

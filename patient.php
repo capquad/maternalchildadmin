@@ -6,8 +6,10 @@ use Functions\Validator;
 
 require './init.php';
 
-if (!$_GET['patient']) {
-	header("Location: /patients.php");
+if (!@$_GET['patient']) {
+	http_response_code(404);
+	exit();
+	// header("Location: /patients.php");
 } else {
 	$patientId = Validator::validateString($_GET['patient']);
 	if ($patientId) {

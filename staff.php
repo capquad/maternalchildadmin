@@ -36,24 +36,25 @@ if (isset($_GET['staff'])) {
 	echo <<<_HTML
 	<div id="main">
 	<div class="container py-3">
-	<h1>Staff</h1>
+		<h1>Staff</h1>
 	</div>
 	
 	<div class="container">
-	<table class="data-table">
-	<thead>
-	<tr>
-	<th></th>
-	<th>Name</th>
-	<th>Department</th>
-	</tr>
-	</thead>
-	<tbody></tbody>
+	<table class="data-table display">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Name</th>
+			<th>Department</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
 	</table>
 	</div>
 	</div>
 	_HTML;
-	$scripts = ['Datatable.js', 'staff.js'];
+	$scripts = ['staff.js'];
 }
 
 require './views/snippets/footer.php';
