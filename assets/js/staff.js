@@ -15,6 +15,10 @@ $(() => {
 					<td>${d.phone}</td>
 				</tr>
 				<tr>
+					<td>Office:</td>
+					<td>${d.office}</td>
+				</tr>
+				<tr>
 					<td><a href="/staff.php?staff=${d.id}">View</a></td>
 				</tr>
 			</table>`;
@@ -34,10 +38,10 @@ $(() => {
 				{ data: 'name' },
 				{ data: 'office' },
 			],
-			order: [[1, 'asc']],
 			language: {
 				search: 'Type to search: ',
 			},
+			lengthChange: false,
 		});
 
 		$('.data-table tbody').on('click', 'td.details-control', function () {

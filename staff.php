@@ -6,7 +6,7 @@ use Functions\Validator;
 
 require './init.php';
 
-$stylesheets = ['table.css'];
+$stylesheets = ['table.css', 'forms.css'];
 
 if (isset($_GET['staff'])) {
 	$staffId = Validator::validateInteger($_GET['staff']);

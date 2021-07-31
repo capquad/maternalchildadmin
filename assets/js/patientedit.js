@@ -34,11 +34,9 @@
 	});
 
 	window.addEventListener('load', () => {
-		const false9s = document.querySelectorAll('.false-9');
+		const false9s = document.querySelectorAll('[data-origin]');
 		false9s.forEach((false9) => {
-			const target = false9.getAttribute('data-origin');
 			false9.addEventListener('change', function () {
-				// console.log(this);
 				const target = document.querySelector(this.getAttribute('data-origin'));
 				target.value = this.value;
 			});

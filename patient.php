@@ -118,7 +118,7 @@ require './views/snippets/header.php';
 			<div class="form-group">
 				<input type="hidden" name="card-number" value="<?= $patient['cardNumber'] ?>" />
 				<input type="submit" class="btn btn-primary" value="Submit" name="updatePatient" />
-				<button type="button" class="btn btn-success">Check In</button>
+				<button type="button" class="btn btn-success" id="check-in" data-info="<?= $patient['cardNumber'] ?>">Check In</button>
 			</div>
 		</form>
 	</div>

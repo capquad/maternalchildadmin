@@ -100,6 +100,23 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="f-department">Department</label>
+				<div class="row">
+					<input type="hidden" id="department" name="office" value="<?= $staff['office'] ? $staff['office'] : 'ict' ?>">
+					<div class="col-10">
+						<select name="f-department" id="f-department" class="form-control" data-origin="#department" disabled>
+							<option value="ict" <?= $staff['office'] === 'ict' ? "selected='selected'" : '' ?> selected>ICT</option>
+							<option value="records" <?= $staff['office'] === 'records' ? "selected='selected'" : '' ?>>Records</option>
+							<option value="pharm" <?= $staff['office'] === 'pharm' ? "selected='selected'" : '' ?>>Pharmacy</option>
+							<option value="facility" <?= $staff['office'] === 'facility' ? "selected='selected'" : '' ?>>Facility</option>
+						</select>
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn btn-danger my-0" data-property="disabled" data-target="#f-department">Edit</button>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
 				<input type="hidden" name="staff" value="<?= $staff['id'] ?>" />
 				<input type="submit" class="btn btn-primary" value="Submit" name="updatePatient" />
 			</div>

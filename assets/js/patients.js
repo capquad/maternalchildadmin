@@ -1,26 +1,17 @@
 (() => {
-	async function getPatientNumber(category = 'personal') {
+	document.addEventListener("DOMContentLoaded", () => {
 		try {
-			const res = await fetch('/api/patients.php?getNewNumber&category=' + category);
-			const data = await res.json();
-			if (data.ok) {
-				return data.data['card-number'];
-			}
-		} catch (err) {
-			console.error(err);
-		}
-	}
-	window.addEventListener('load', () => {
-		try {
-			document.querySelector('#generateNumber').addEventListener('click', async function () {
-				const category = document.querySelector('#category').value;
-				const number = await getPatientNumber(category);
-				document.querySelector('#card-number').value = number;
-			});
+			document
+				.querySelector("#generateNumber")
+				.addEventListener("click", async function () {
+					const category = document.querySelector("#category").value;
+					const number = await getPatientNumber(category);
+					document.querySelector("#card-number").value = number;
+				});
 		} catch (e) {}
 	});
 
-	window.addEventListener('load', () => {
+	document.addEventListener("DOMContentLoaded", () => {
 		function format(d) {
 			return `<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px">
 				<tr>
@@ -44,42 +35,43 @@
 					<td>${d.gender}</td>
 				</tr>
 				<tr>
-					<td><a href="/patient.php?patient=${d['card-no']}">View</a></td>
+					<td><a href="/patient.php?patient=${d["card-no"]}">View</a></td>
 				</tr>
 			</table>`;
 		}
-		const table = $('#data-table').DataTable({
+		const table = $("#data-table").DataTable({
 			ajax: {
-				url: '/api/patients.php',
-				dataSrc: '',
+				url: "/api/patients.php",
+				dataSrc: "",
 			},
 			columns: [
 				{
-					className: 'details-control',
+					className: "details-control",
 					orderable: false,
 					data: null,
-					defaultContent: '',
+					defaultContent: "",
 				},
-				{ data: 'card-no' },
-				{ data: 'name' },
-				{ data: 'category' },
+				{ data: "card-no" },
+				{ data: "name" },
+				{ data: "category" },
 			],
-			order: [[1, 'asc']],
+			lengthChange: false,
+			order: [[1, "asc"]],
 			language: {
-				search: 'Type to search: ',
+				search: "Type to search: ",
 			},
 		});
 
-		$('#data-table tbody').on('click', 'td.details-control', function () {
-			const tr = $(this).closest('tr');
+		$("#data-table tbody").on("click", "td.details-control", function () {
+			const tr = $(this).closest("tr");
 			const row = table.row(tr);
 
 			if (row.child.isShown()) {
 				row.child.hide();
-				tr.removeClass('shown');
+				tr.removeClass("shown");
 			} else {
 				row.child(format(row.data())).show();
-				tr.addClass('shown');
+				tr.addClass("shown");
 			}
 		});
 	});

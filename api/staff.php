@@ -24,12 +24,13 @@ if (@$_GET['endpoint'] === 'update') {
 		$birthDate = Validator::validateDate($_POST['birthdate']);
 		$email = Validator::validateEmail($_POST['email']);
 		$phone = Validator::validatePhone($_POST['phone']);
+		$office = Validator::validateOption($_POST['office'], ['records', 'ict', 'pharm', 'facility']);
 
+		// Response::Json([$office, $_POST['office']]);
 		$update1 = $db->update('staff', ['firstname' => $firstname, 'lastname' => $lastname, 'middlename' => $middlename, 'title' => $title], "id='$id'");
 
-		// Response::Json([$update1]);
 
-		$db->update('staff_details', ['phone' => $phone, 'email' => $email, 'gender' => $gender, 'birthDate' => $birthDate], "staffid='$id'");
+		$db->update('staff_details', ['phone' => $phone, 'email' => $email, 'gender' => $gender, 'birthDate' => $birthDate, 'office' => $office], "staffid='$id'");
 		Response::Json(['ok' => true]);
 	}
 }
@@ -44,11 +45,14 @@ if (@$_GET['endpoint'] === 'create') {
 	$gender = Validator::validateOption($_POST['gender'], ['male', 'female']);
 	$email = Validator::validateEmail($_POST['email']);
 	$phone = Validator::validatePhone($_POST['phone']);
+	$office = Validator::validateOption($_POST['office'], ['records', 'ict', 'pharm', 'facility']);
+
+	// Response::Json([$office]);
 
 	if ($firstname and $lastname and $phone and $title and $gender) {
 		$insertOne = $db->insert('staff', ['title' => $title, 'firstname' => $firstname, 'lastname' => $lastname, 'middlename' => $middlename]);
 		if ($insertOne) {
-			if ($db->insert('staff_details', ['staffid' => $insertOne, 'phone' => $phone, 'email' => $email])) {
+			if ($db->insert('staff_details', ['staffid' => $insertOne, 'phone' => $phone, 'email' => $email, 'office' => $office])) {
 				Response::Json(['ok' => true, 'id' => $insertOne]);
 			}
 			Response::Json(['ok' => false, 'error' => 'Staff Details not created successfully. Contact Admin']);
@@ -66,7 +70,9 @@ $nstaff = array_map(function ($data) use ($db) {
 
 
 	$data['name'] = "$data[firstname] $data[lastname] $data[middlename]";
+	$data['office'] = ucfirst($data['office']);
 	unset($data['firstname'], $data['lastname'], $data['middlename']);
+	unset($details);
 	return $data;
 }, $staff);
 

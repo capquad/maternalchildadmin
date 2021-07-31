@@ -33,10 +33,6 @@ require './views/snippets/header.php';
 				<input type="text" name="middlename" id="middlename" class="form-control" />
 			</div>
 			<div class="form-group">
-				<label for="phone" class="required">Phone Number</label>
-				<input type="text" name="phone" id="phone" required="required" class="form-control" />
-			</div>
-			<div class="form-group">
 				<label for="gender" class="required">Gender</label>
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="radio" value="male" id="male" name="gender" />
@@ -48,8 +44,15 @@ require './views/snippets/header.php';
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="phone" class="required">Phone Number</label>
+				<input type="text" name="phone" id="phone" required="required" class="form-control" />
+			</div>
+			<div class="form-group">
 				<label for="email" class="required">E-mail Address</label>
 				<input type="email" name="email" id="email" required="required" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for=""></label>
 			</div>
 			<div class="form-group">
 				<input type="submit" class="btn btn-primary" value="Submit" name="createStaff" />
@@ -58,5 +61,5 @@ require './views/snippets/header.php';
 	</div>
 </div>
 <?php
-$scripts = [];
+// $scripts = ['patientedit.js'];
 require './views/snippets/footer.php';
